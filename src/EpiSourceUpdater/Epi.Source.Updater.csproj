@@ -48,7 +48,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0" />
-	<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Abstractions" Version="*" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Abstractions" Version="0.4.346202" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
