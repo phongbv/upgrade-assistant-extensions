@@ -31,6 +31,7 @@ namespace WebApplication1
             {
                 options.LoginPath = "/util/Login";
             });
+            services.AddHttpContextAccessor();
         }
 
 
@@ -40,6 +41,12 @@ namespace WebApplication1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                // Custom redirect
+                app.UseExceptionHandler("/ErrorHandler/StatusCode/500");
+                app.UseStatusCodePagesWithReExecute("/ErrorHandler/StatusCode/{0}");
             }
 
             app.UseStaticFiles();

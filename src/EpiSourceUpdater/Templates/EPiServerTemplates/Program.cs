@@ -5,6 +5,7 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication1
 {
@@ -17,6 +18,13 @@ namespace WebApplication1
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, configure) =>
+                {
+                    if (context.HostingEnvironment.IsDevelopment())
+                    {
+                        configure.AddUserSecrets<Startup>();
+                    }
+                })
                 .ConfigureCmsDefaults()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

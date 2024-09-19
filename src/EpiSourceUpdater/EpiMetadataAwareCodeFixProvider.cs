@@ -91,12 +91,16 @@ namespace Epi.Source.Updater
                 var withUpdatedName = onMetadataCreated.WithIdentifier(SyntaxFactory.Identifier("CreateDisplayMetadata"));
                 var updatedParameter = onMetadataCreated.ParameterList.Parameters[0].WithIdentifier(SyntaxFactory.Identifier("context")).WithType(SyntaxFactory.ParseTypeName("DisplayMetadataProviderContext")).WithTrailingTrivia();
                 var withUpdatedParameterList = withUpdatedName.WithParameterList(SyntaxFactory.ParameterList(SyntaxFactory.SingletonSeparatedList<ParameterSyntax>(updatedParameter)));
+                MethodDeclarationSyntax withUpdatedBody;
                 if(withUpdatedParameterList.Body.Statements.Count == 0)
                 {
-                    classDeclaration = classDeclaration.WithMembers(classDeclaration.Members.Remove(onMetadataCreated));
+                    withUpdatedBody = withUpdatedParameterList.WithBody(withUpdatedParameterList.Body);
+                    // var members = classDeclaration.Members.Remove(onMetadataCreated);
+                    // members = members.Add(withUpdatedBody);
+                    classDeclaration = classDeclaration.WithMembers(classDeclaration.Members.Remove(onMetadataCreated).Add(withUpdatedBody));
                     return classDeclaration;
                 }
-                var withUpdatedBody = withUpdatedParameterList.WithBody(withUpdatedParameterList.Body.WithStatements(
+                withUpdatedBody = withUpdatedParameterList.WithBody(withUpdatedParameterList.Body.WithStatements(
                     withUpdatedName.Body.Statements.Insert(0, SyntaxFactory.ParseStatement($"var {originalParameterName} = context.DisplayMetadata.AdditionalValues[ExtendedMetadata.ExtendedMetadataDisplayKey] as ExtendedMetadata;")
                         .WithLeadingTrivia(withUpdatedParameterList.Body.Statements[0].GetLeadingTrivia()).WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed))));
 
