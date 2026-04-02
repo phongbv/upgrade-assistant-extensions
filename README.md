@@ -8,7 +8,7 @@ These extensions expand the upgrade-assistant tools's functionality to make Opti
 
 ## Installation
 
-Install the latest version of the upgrade-assistant `dotnet tool install -g upgrade-assistant` or upgrade `dotnet tool update -g upgrade-assistant`
+Install the latest version of the upgrade-assistant `dotnet tool install --local upgrade-assistant --version 0.4.421302` or upgrade `dotnet tool update -g upgrade-assistant`
 
 Grab the latest release from [here](https://github.com/episerver/upgrade-assistant-extensions/releases) and unzip the file to a location of your computer (ex C:\temp\epi.source.updater).  Technically you should be able to point the zip file instead of extracting but there seems to be a bug in upgrade-assistant at the moment for that.
 
